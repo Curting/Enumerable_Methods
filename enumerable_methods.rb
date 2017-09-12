@@ -7,11 +7,10 @@ module Enumerable
   end
 
   def my_each_with_index
-    n = self.length
     i = 0
 
-    n.times do |element|
-      yield(self[i], i)
+    for elements in self
+      yield(elements, i)
       i += 1
     end
 

@@ -27,4 +27,14 @@ module Enumerable
     selected
   end
 
+  def my_all?
+    statement = true
+
+    self.my_each do |element|
+      statement = false if not yield(element)
+    end
+
+    statement
+  end
+
 end

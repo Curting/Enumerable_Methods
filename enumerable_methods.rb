@@ -57,6 +57,20 @@ module Enumerable
     statement
   end
 
+  def my_count(n = nil)
+    count = 0
+
+    self.my_each do |element|
+      if n != nil
+        count += 1 if element == n
+      elsif block_given?
+        count += 1 if yield(element)
+      end
+    end
+
+    count
+  end
+
 end
 
 #any?, #none?, #count, #map

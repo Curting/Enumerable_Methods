@@ -37,4 +37,16 @@ module Enumerable
     statement
   end
 
+  def my_any?
+    statement = false
+
+    self.my_each do |element|
+      statement = true if yield(element)
+    end
+
+    statement
+  end
+
 end
+
+#any?, #none?, #count, #map

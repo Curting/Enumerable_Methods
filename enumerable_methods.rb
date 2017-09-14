@@ -97,12 +97,28 @@ module Enumerable
     end
   end
 
+  # Make #my_map accept a proc
   def my_map_proc(proc = nil)
     if proc != nil
       temp_array = []
 
       for elements in self
         temp_array << proc.call(elements)
+      end
+
+      temp_array
+    else
+      self.to_enum
+    end
+  end
+
+  # Make #my_map accept a block or proc
+  def my_map_any(&block)
+    if block_given?
+      temp_array = []
+
+      for elements in self
+        temp_array << yield(elements)
       end
 
       temp_array

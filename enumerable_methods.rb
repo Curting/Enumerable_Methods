@@ -71,6 +71,15 @@ module Enumerable
     count
   end
 
+  def my_map
+    temp_array = []
+    for elements in self
+      temp_array << yield(elements)
+    end
+
+    temp_array
+  end
+
 end
 
 #any?, #none?, #count, #map

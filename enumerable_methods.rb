@@ -98,7 +98,8 @@ module Enumerable
   end
 
   def my_inject(total = nil)
-    # This method is totally flawed. Not ready for this yet!
+    # This method is flawed, since it doesn't accept two
+    # parameters or one + a block. Too difficult right now.
 
     if total == nil
       total = self[0]

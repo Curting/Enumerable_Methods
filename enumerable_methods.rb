@@ -80,6 +80,22 @@ module Enumerable
     temp_array
   end
 
-end
+  def my_inject(total = nil)
+    # This method is totally flawed. Not ready for this yet!
 
-#any?, #none?, #count, #map
+    if total == nil
+      total = self[0]
+      self[1..-1].my_each do |element|
+        total = yield(total, element)
+      end
+
+    else
+      self.my_each do |element|
+        total = yield(total, element)
+      end
+    end
+
+    total
+  end
+
+end

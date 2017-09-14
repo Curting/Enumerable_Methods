@@ -115,4 +115,8 @@ module Enumerable
     total
   end
 
+  def multiply_els
+    self.my_inject {|sum, x| sum * x}
+  end
+
 end

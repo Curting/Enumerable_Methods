@@ -97,6 +97,20 @@ module Enumerable
     end
   end
 
+  def my_map_proc(proc = nil)
+    if proc != nil
+      temp_array = []
+
+      for elements in self
+        temp_array << proc.call(elements)
+      end
+
+      temp_array
+    else
+      self.to_enum
+    end
+  end
+
   def my_inject(total = nil)
     # This method is flawed, since it doesn't accept two
     # parameters or one + a block. Too difficult right now.
@@ -116,8 +130,8 @@ module Enumerable
     total
   end
 
-  def multiply_els
-    self.my_inject {|sum, x| sum * x}
-  end
+end
 
+def multiply_els(obj)
+  obj.my_inject {|sum, x| sum * x}
 end

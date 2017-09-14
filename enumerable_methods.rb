@@ -1,30 +1,42 @@
 module Enumerable
 
   def my_each
-    for elements in self
-      yield(elements)
+    if block_given?
+      for elements in self
+        yield(elements)
+      end
+    else
+      self.to_enum
     end
   end
 
   def my_each_with_index
-    i = 0
+    if block_given?
+      i = 0
 
-    for elements in self
-      yield(elements, i)
-      i += 1
+      for elements in self
+        yield(elements, i)
+        i += 1
+      end
+
+      self
+    else
+      self.to_enum
     end
-
-    self
   end
 
   def my_select
-    selected = []
+    if block_given?
+      selected = []
 
-    self.my_each do |element|
-      selected << element if yield(element)
+      self.my_each do |element|
+        selected << element if yield(element)
+      end
+
+      selected
+    else
+      self.to_enum
     end
-
-    selected
   end
 
   def my_all?
@@ -72,12 +84,17 @@ module Enumerable
   end
 
   def my_map
-    temp_array = []
-    for elements in self
-      temp_array << yield(elements)
-    end
+    if block_given?
+      temp_array = []
 
-    temp_array
+      for elements in self
+        temp_array << yield(elements)
+      end
+
+      temp_array
+    else
+      self.to_enum
+    end
   end
 
   def my_inject(total = nil)

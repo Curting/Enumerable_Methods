@@ -139,4 +139,27 @@ describe Enumerable do
     end
   end
 
+  describe "#my_count" do
+
+    context "when given an argument" do
+      it "returns the count of elements true to the argument" do
+        expect(array1.my_count(3)).to eq(1)
+        expect(array1.my_count(6)).to eq(0)
+        expect(Array.new.my_count(2)).to eq(0)
+      end
+    end
+
+    context "when given a block" do
+      it "returns the count of elements true to the block" do
+        expect(array1.my_count { |e| e > 1 }).to eq(2)
+        expect(array1.my_count { |e| e > 10}).to eq(0)
+      end
+    end
+
+    context "when not given an argument or block" do
+      it "returns the count of elements" do
+        expect(array1.my_count).to eq(3)
+      end
+    end
+  end
 end

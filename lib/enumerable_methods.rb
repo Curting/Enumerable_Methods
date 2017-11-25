@@ -75,18 +75,24 @@ module Enumerable
     else
       statement = false
     end
-    
+
     statement
   end
 
   def my_count(n = nil)
     count = 0
 
-    self.my_each do |element|
-      if n != nil
-        count += 1 if element == n
-      elsif block_given?
-        count += 1 if yield(element)
+    if block_given? || !n.nil?
+      self.my_each do |element|
+        if n != nil
+          count += 1 if element == n
+        elsif block_given?
+          count += 1 if yield(element)
+        end
+      end
+    else
+      self.my_each do |element|
+        count += 1
       end
     end
 

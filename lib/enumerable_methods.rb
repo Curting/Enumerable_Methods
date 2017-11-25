@@ -61,17 +61,21 @@ module Enumerable
     else
       statement = true
     end
-    
+
     statement
   end
 
   def my_none?
-    statement = true
+    if block_given?
+      statement = true
 
-    self.my_each do |element|
-      statement = false if yield(element)
+      self.my_each do |element|
+        statement = false if yield(element)
+      end
+    else
+      statement = false
     end
-
+    
     statement
   end
 

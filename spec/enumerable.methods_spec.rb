@@ -116,4 +116,27 @@ describe Enumerable do
     end
   end
 
+  describe "#my_none?" do
+
+    context "when given a block" do
+      context "when the block returns false to all of the elements" do
+        it "returns true" do
+          expect(array1.my_none? { |e| e > 10 }).to be(true)
+        end
+      end
+
+      context "when the block returns true to any of the elements" do
+        it "returns false" do
+          expect(array1.my_none? { |e| e == 3 }).to be(false)
+        end
+      end
+    end
+
+    context "when not given a block" do
+      it "returns false" do
+        expect(array1.my_none?).to be(false)
+      end
+    end
+  end
+
 end

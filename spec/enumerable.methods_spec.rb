@@ -7,7 +7,7 @@ describe Enumerable do
   
   describe "#my_each" do
 
-    context "with a block" do
+    context "when given a block" do
       it "returns itself" do
         expect(array1.my_each { |e| e }).to eq(array1)
       end
@@ -21,7 +21,7 @@ describe Enumerable do
       end
     end
 
-    context "without a block" do
+    context "when not given a block" do
       it "returns enumerator" do
         expect(array1.my_each).to be_an(Enumerator)
       end
@@ -30,7 +30,7 @@ describe Enumerable do
 
   describe "#my_each_with_index" do
 
-    context "with a block" do
+    context "when given a block" do
       it "returns itself" do
         expect(array1.my_each_with_index { |e, idx| e }).to eq(array1)
       end
@@ -40,7 +40,7 @@ describe Enumerable do
       end
     end
 
-    context "without a block" do
+    context "when not given a block" do
       it "returns enumerator" do
         expect(array1.my_each_with_index).to be_an(Enumerator)
       end
@@ -49,15 +49,47 @@ describe Enumerable do
 
   describe "#my_select" do
 
-    context "with a block" do
-      it "returns an array of elements for which the block returns true" do
-        expect(array1.my_select { |e| e > 2 }).to eq([3, 5])
+    context "when given a block" do
+      context "when the block returns true on elements" do
+        it "returns an array of those elements" do
+          expect(array1.my_select { |e| e > 2 }).to eq([3, 5])
+        end
+      end
+
+      context "when the block returns false on all elements" do
+        it "returns an empty array" do
+          expect(array1.my_select { |e| e > 10 }).to eq([])
+        end
       end
     end
 
-    context "without a block" do
+    context "when not given a block" do
       it "returns enumerator" do
         expect(array1.my_select).to be_an(Enumerator)
+      end
+    end
+  end
+
+  describe "#my_all?" do
+
+    context "when given a block" do
+
+      context "when the block returns true to all elements" do
+        it "returns true" do
+          expect(array1.my_all? { |e| e < 10 }).to be(true)
+        end
+      end
+      
+      context "when the block returns false to any of the elements" do
+        it "returns false" do
+          expect(array1.my_all? { |e| e > 2 }).to be(false)
+        end
+      end
+    end
+
+    context "when not given a block" do
+      it "returns true" do
+        expect(array1.my_all?).to be(true)
       end
     end
   end

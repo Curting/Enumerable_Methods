@@ -42,10 +42,12 @@ module Enumerable
   def my_all?
     statement = true
 
-    self.my_each do |element|
-      statement = false if not yield(element)
+    if block_given?
+      self.my_each do |element|
+        statement = false if not yield(element)
+      end
     end
-
+    
     statement
   end
 

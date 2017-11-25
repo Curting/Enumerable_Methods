@@ -73,7 +73,6 @@ describe Enumerable do
   describe "#my_all?" do
 
     context "when given a block" do
-
       context "when the block returns true to all elements" do
         it "returns true" do
           expect(array1.my_all? { |e| e < 10 }).to be(true)
@@ -90,6 +89,29 @@ describe Enumerable do
     context "when not given a block" do
       it "returns true" do
         expect(array1.my_all?).to be(true)
+      end
+    end
+  end
+
+  describe "#my_any?" do
+
+    context "when given a block" do
+      context "when the block returns true to any of the elements" do
+        it "returns true" do
+          expect(array1.my_any? { |e| e == 1 }).to be(true)
+        end
+      end
+
+      context "when the block returns false to all elements" do
+        it "returns false" do
+          expect(array1.my_any? { |e| e > 10 }).to be(false)
+        end
+      end
+    end
+
+    context "when not given a block" do
+      it "returns true" do
+        expect(array1.my_any?).to be(true)
       end
     end
   end

@@ -47,17 +47,21 @@ module Enumerable
         statement = false if not yield(element)
       end
     end
-    
+
     statement
   end
 
   def my_any?
-    statement = false
+    if block_given?
+      statement = false
 
-    self.my_each do |element|
-      statement = true if yield(element)
+      self.my_each do |element|
+        statement = true if yield(element)
+      end
+    else
+      statement = true
     end
-
+    
     statement
   end
 

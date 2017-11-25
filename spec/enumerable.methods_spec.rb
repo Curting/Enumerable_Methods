@@ -46,4 +46,20 @@ describe Enumerable do
       end
     end
   end
+
+  describe "#my_select" do
+
+    context "with a block" do
+      it "returns an array of elements for which the block returns true" do
+        expect(array1.my_select { |e| e > 2 }).to eq([3, 5])
+      end
+    end
+
+    context "without a block" do
+      it "returns enumerator" do
+        expect(array1.my_select).to be_an(Enumerator)
+      end
+    end
+  end
+
 end

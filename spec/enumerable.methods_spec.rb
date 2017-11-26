@@ -215,4 +215,25 @@ describe Enumerable do
     end
   end
 
+  describe "#my_inject" do
+
+    context "when given a block" do
+      it "performs the block on each element and returns result" do
+        expect(array1.my_inject { |sum, e| sum * e }).to eq(15)
+      end
+    end
+
+    context "when given a block and argument" do
+      it "performs as usual but initiates accumulator at the argument value" do
+        expect(array1.my_inject(2) { |sum, e| sum * e }).to eq(30)
+      end 
+    end
+
+    context "when not given a block or argument" do
+      it "raises an LocalJumpError" do
+        expect { array1.my_inject }.to raise_error LocalJumpError
+      end
+    end
+  end
+
 end

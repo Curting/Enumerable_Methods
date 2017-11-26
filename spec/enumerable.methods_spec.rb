@@ -178,4 +178,21 @@ describe Enumerable do
     end
   end
 
+  describe "#my_map_proc" do
+
+    let(:proc1) { Proc.new { |e| e * 3 } }
+
+    context "when given a proc as argument" do
+      it "performs the proc on each element and return array" do
+        expect(array1.my_map_proc(proc1)).to eq([3, 9, 15])
+      end
+    end
+
+    context "when not given an argument" do
+      it "returns enumerator" do
+        expect(array1.my_map_proc).to be_an(Enumerator)
+      end
+    end
+  end
+
 end

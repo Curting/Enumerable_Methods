@@ -162,4 +162,20 @@ describe Enumerable do
       end
     end
   end
+
+  describe "#my_map" do
+
+    context "when given a block" do
+      it "performs the block on each element and return array" do
+        expect(array1.my_map { |e| e * 2 }).to eq([2, 6, 10])
+      end
+    end
+
+    context "when not given a block" do
+      it "returns enumerator" do
+        expect(array1.my_map).to be_an(Enumerator)
+      end
+    end
+  end
+
 end

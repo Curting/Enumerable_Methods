@@ -4,6 +4,7 @@ describe Enumerable do
 
   let(:array1) { [1, 3, 5] }
   let(:array2) { [3, "hello", "5"] }
+  let(:proc1) { Proc.new { |e| e * 3 } }
   
   describe "#my_each" do
 
@@ -180,8 +181,6 @@ describe Enumerable do
 
   describe "#my_map_proc" do
 
-    let(:proc1) { Proc.new { |e| e * 3 } }
-
     context "when given a proc as argument" do
       it "performs the proc on each element and return array" do
         expect(array1.my_map_proc(proc1)).to eq([3, 9, 15])
@@ -191,6 +190,27 @@ describe Enumerable do
     context "when not given an argument" do
       it "returns enumerator" do
         expect(array1.my_map_proc).to be_an(Enumerator)
+      end
+    end
+  end
+
+  describe "#my_map_any" do
+
+    context "when given a proc as argument" do
+      it "performs the proc on each element and return array" do
+        expect(array1.my_map_any(&proc1)).to eq([3, 9, 15])
+      end
+    end
+
+    context "when given a block" do
+      it "performs the block on each element and return array" do
+        expect(array1.my_map_any { |e| e + 2 }).to eq([3, 5, 7])
+      end
+    end
+
+    context "when not given a block or proc" do
+      it "returns enumerator" do
+        expect(array1.my_map_any).to be_an(Enumerator)
       end
     end
   end
